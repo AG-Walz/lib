@@ -38,5 +38,3 @@ kmerGenerator <- function(range, target) {
   ## Return the peptides content
   return(peptides)
 }
-
-test <- kmerGenerator(8:25, kmerContent)
