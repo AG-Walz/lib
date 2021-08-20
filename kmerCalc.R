@@ -8,11 +8,12 @@
 ##    - target  = A dataframe that has the sequence hits saved in a column
 ##                named "Sequence"
 ## Output:
-##    - peptides= A dataframe that adds the kmer column to the exsisting df
+##    - peptides= A dataframe that adds the kmer column to the existing df
 ##  ---- 
 ## Author:
 ##    - M.L. Dubbelaar 
 ################################################################################
+
 kmerGenerator <- function(range, target) {
   ## Create an empty data.frame
   peptides <- data.frame()
