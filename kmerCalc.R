@@ -27,20 +27,27 @@ kmerGenerator <- function(range, target) {
       ## Walk over the different peptide length possibilities
       for (move in 0:(peplength-1)) {
         ## Create the kmer sequence in the mutation sequencing
-        pep <<- ifelse("aa_pos" %in% colnames(target), 
+        pep <<- ifelse("aa_pos" %in% tolower(colnames(target)), 
                        paste0(substr(target$Sequence[rownr], target$aa_pos[rownr]-move, target$aa_pos[rownr]-move+peplength-1)),
                        paste0(substr(target$Sequence[rownr], move, move+peplength-1)))
         ## If the length of the kmer is longer than 7 characters
         if (nchar(pep) > peplength-1) {
+          ## Create the right information (depending if it is mutation data or not)
+          ifelse("aa_pos" %in% tolower(colnames(target)), 
+                           dfComp <- cbind(target[rownr,], data.frame(kmer=pep)), 
+                           dfComp <- cbind(target[rownr,],
+                                   data.frame(kmer=pep,
+                                   mutation=paste0(target$aa_wt[rownr], target$aa_pos[rownr], target$aa_mut[rownr]),
+                                   frameshift=move,
+                                   kmerLength=peplength)))
           ## Increment the peptides with the corresponding information
-          peptides <- rbind(peptides,
-                            data.frame(pep, target))
+          peptides <- rbind(peptides, dfComp)
         }
       }
     }
   }
   ## Rewrite the colnames to the information from the target file
-  colnames(peptides) <- c("kmer", colnames(target))
+  # colnames(peptides) <- c(colnames(target), "kmer", colnames(target))
   ## Return the peptides content
   return(peptides)
 }
