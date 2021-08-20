@@ -16,9 +16,6 @@
 ################################################################################
 
 source_github <- function(scriptName, git_mail=Sys.getenv("GITHUB_MAIL"), git_password=Sys.getenv("GITHUB_PAT")) {
-  ## Load package
-  library(httr)
-  library(dplyr)
 
   ## Source R script from Github
   script <-
@@ -28,8 +25,7 @@ source_github <- function(scriptName, git_mail=Sys.getenv("GITHUB_MAIL"), git_pa
       ## or use the defined git_mail and git_password
       authenticate(Sys.getenv("GITHUB_MAIL"), Sys.getenv("GITHUB_PAT")),     
       accept("application/vnd.github.v3.raw")
-    ) %>%
-    content(as = "text")
+    ) %>% httr::content(as = "text")
   
   ## Parse lines and evaluate in the global environment
   eval(parse(text = script), envir= .GlobalEnv)
