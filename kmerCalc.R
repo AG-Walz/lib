@@ -34,12 +34,15 @@ kmerGenerator <- function(range, target) {
         if (nchar(pep) > peplength-1) {
           ## Create the right information (depending if it is mutation data or not)
           ifelse("aa_pos" %in% tolower(colnames(target)), 
-                           dfComp <- cbind(target[rownr,], data.frame(kmer=pep)), 
                            dfComp <- cbind(target[rownr,],
                                    data.frame(kmer=pep,
                                    mutation=paste0(target$aa_wt[rownr], target$aa_pos[rownr], target$aa_mut[rownr]),
                                    frameshift=move,
-                                   kmerLength=peplength)))
+                                   kmerLength=peplength)),
+                          dfComp <- cbind(target[rownr,], 
+                                          data.frame(kmer=pep,
+                                                     kmerframeshift=move,
+                                                     kmerLength=peplength)))
           ## Increment the peptides with the corresponding information
           peptides <- rbind(peptides, dfComp)
         }
