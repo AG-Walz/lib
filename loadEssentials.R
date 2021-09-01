@@ -32,16 +32,16 @@ ggplotTheme <- theme(axis.text = element_text(size = 8),
 ################################################################################
 ## Make sure that you look though the different df rows to get the information 
 ## which is necessary to save to a fasta file
-createFastaContent <- function(dataf, column) {
+createFastaContent <- function(dataf, column, geneInfo) {
   ## Define an empty list
   linesToWrite <- c()
   for (geneHit in 1:nrow(dataf)) { 
     ## Obtain all of the necessary information to write the fasta files
     linesToWrite <- c(linesToWrite,
-                      paste0(">sp|", geneSym$UNIPROTKB, "_DS", rownames(dataf)[geneHit], "| ",
-                             unlist(strsplit(geneSym$`PROTEIN-NAMES`, " \\("))[1],
-                             " OS=", unlist(strsplit(geneSym$ORGANISM, " \\("))[1],
-                             " GN=", geneSym$GENECARDS),
+                      paste0(">sp|", geneInfo$UNIPROTKB, "_DS", rownames(dataf)[geneHit], "| ",
+                             unlist(strsplit(geneInfo$`PROTEIN-NAMES`, " \\("))[1],
+                             " OS=", unlist(strsplit(geneInfo$ORGANISM, " \\("))[1],
+                             " GN=", geneInfo$GENECARDS),
                       dataf[geneHit, c(column)]
     )
   }
