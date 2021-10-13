@@ -12,6 +12,9 @@
 ## Author:
 ##    - M.L. Dubbelaar 
 ################################################################################
+## Make sure that it is not asked to update the packages 
+update.packages(ask = FALSE, Ncpus = 3L)
+## Add more information to the necessary libraries
 necessaryLibs <- c(necessaryLibs, 
                    "ggplot2", "ggthemes", "ggpubr",  "tidyr", "reshape", "tuple", 
                    "textshape", "purrr", "stringr", "openxlsx", "doParallel", 
