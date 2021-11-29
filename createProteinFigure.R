@@ -20,11 +20,17 @@ drawProtein <- function(rel_json) {
   ## Convert it to a dataframe object
   rel_data <- drawProteins::feature_to_dataframe(rel_json)
   ## Create an empty canvas for the creation of this figure
-  draw_canvas(rel_data) -> p
+  p <- draw_canvas(rel_data) 
   ## Draw the protein chain or the protein "base" 
   p <- draw_chains(p, rel_data, label_chains = F)
-  ## Add the domains (drawn to scale - lengths).
-  p <- draw_domains(p, rel_data, label_domains = F, )
+  ## Add the domains (drawn to scale - lengths)
+  p <- draw_domains(p, rel_data, label_domains = F)
+  ## Add activation domain
+  p <- draw_regions(p, rel_data)
+  ## Add repeating regions
+  p <- draw_repeat(p, rel_data)
+  ## Add motifs of the protein
+  p <- draw_motif(p, rel_data)
   ## Add the phosphorylation sites from Uniprot
   p <- draw_phospho(p, rel_data, size = 3, fill = "grey50") 
   ## Alter the figures' style
@@ -41,3 +47,4 @@ drawProtein <- function(rel_json) {
   ## Return the ggplot content
   return(p)
 }
+        
