@@ -16,7 +16,7 @@
 ##                               Figure content                               ##
 ################################################################################
 ## Create the image that represents the protein and the belonging regions
-drawProtein <- function(rel_json) {
+drawProtein <- function(rel_json, legendPos) {
   ## Convert it to a dataframe object
   rel_data <- drawProteins::feature_to_dataframe(rel_json)
   ## Create an empty canvas for the creation of this figure
@@ -41,10 +41,15 @@ drawProtein <- function(rel_json) {
           axis.text.y = element_blank(),
           axis.text.x = element_blank(),
           panel.border = element_blank(),
-          legend.position="bottom",
-          plot.margin = margin(t =3,r = 0,b = 3,l = 1.3, "cm")
-    )
+          legend.position=legendPos,
+          plot.margin = margin(t =3,r = 0,b = 3,l = 1.3, "cm"),
+          legend.key.size = unit(.25, 'cm'), #change legend key size
+          legend.key.height = unit(.25, 'cm'), #change legend key height
+          legend.key.width = unit(.25, 'cm'), #change legend key width
+          legend.title = element_blank(), #change legend title font size
+          legend.text = element_text(size=6)
+    ) + 
+    guides(fill=guide_legend(nrow=10))
   ## Return the ggplot content
   return(p)
 }
-        
