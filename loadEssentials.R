@@ -20,7 +20,7 @@ registerDoParallel(cl)
 ## Define the baseline ggplot theme
 ggplotTheme <- theme(axis.text = element_text(size = 8),
                      axis.title = element_text(size = 10),
-                     ##panel.background = element_rect(fill = "transparent"), # bg of the panel
+                     panel.background = element_rect(fill = "transparent"), # bg of the panel
                      ##plot.background = element_rect(fill = "transparent", color = NA), # bg of the plot
                      panel.grid.major = element_blank(), # get rid of major grid
                      panel.grid.minor = element_blank(), # get rid of minor grid
