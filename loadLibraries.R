@@ -33,11 +33,11 @@ sapply(unavailable, FUN = function(x) {
     ## Then obtain this package and the dependencies
     toInstall <- BiocManager::available(x)
     ## install the available libraries
-    sapply(toInstall, function(x) BiocManager::install(x))
+    sapply(toInstall, function(x) BiocManager::install(x, ask = FALSE, type = "source"))
     ## If the library is not available on bioclite, then use install.packages
   } else {
     ## Install the library
-    install.packages(x)
+    install.packages(x, ask = FALSE, type = "source")
   }
 })
 
