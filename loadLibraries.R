@@ -28,5 +28,10 @@ if (!requireNamespace("BiocManager", quietly=TRUE)) {
 unavailable <- setdiff(necessaryLibs, rownames(installed.packages()))
 ## Go through the unknown libraries to install them
 sapply(unavailable, FUN = function(x) { install.packages(x, repos = c(BiocManager::repositories()[1], getOption('repos'))) })
+## Check if there are still unknown libraries
+unavailable <- setdiff(necessaryLibs, rownames(installed.packages()))
+## Otherwise install them with biocmanager 
+sapply(unavailable, FUN = function(x) { BiocManager::install(x) })
+
 ## Load the necessary libraries()
 invisible(lapply(necessaryLibs, library, character.only = T))
