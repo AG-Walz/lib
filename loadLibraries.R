@@ -26,20 +26,7 @@ if (!requireNamespace("BiocManager", quietly=TRUE)) {
 
 ## Determine which libraries are yet to be installed
 unavailable <- setdiff(necessaryLibs, rownames(installed.packages()))
-## Go through the unknown libraries
-sapply(unavailable, FUN = function(x) {
-  ## If it is possible to install the library with BiocManager
-  if (length(BiocManager::available(x)) >= 1) {
-    ## Then obtain this package and the dependencies
-    toInstall <- BiocManager::available(x)
-    ## install the available libraries
-    sapply(toInstall, function(x) BiocManager::install(x, ask = FALSE, type = "source"))
-    ## If the library is not available on bioclite, then use install.packages
-  } else {
-    ## Install the library
-    install.packages(x, ask = FALSE, type = "source")
-  }
-})
-
+## Go through the unknown libraries to install them
+sapply(unavailable, FUN = function(x) { install.packages(x, repos = c(BiocManager::repositories()[1], getOption('repos'))) })
 ## Load the necessary libraries()
 invisible(lapply(necessaryLibs, library, character.only = T))
