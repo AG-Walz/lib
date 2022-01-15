@@ -6,15 +6,6 @@
 ## Author:
 ##    - M.L. Dubbelaar 
 ################################################################################
-###                   Setup parameters for parallelization                   ###
-################################################################################
-## Detect the number of cores of the computer
-cores <- detectCores()
-## Define this number -1 (to not overload the computer)
-cl <- makeCluster(cores[1]-2)
-## Register the number of cores
-registerDoParallel(cl)
-################################################################################
 ##                              GGplot content                                ##
 ################################################################################
 ## Define the baseline ggplot theme
