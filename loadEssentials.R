@@ -48,3 +48,29 @@ ggplotTheme <- theme(axis.text = element_text(size = 8),
   ## Return the information that needs to be written to the fasta file
   return(linesToWrite)
 }
+
+collect_protein_info <- function(protein) {
+  ## Get the taxa information of the proteins in the dataframe
+  # protein <- "Q13045"
+  proteinInformation <- GetNamesTaxa(protein)
+  ## Obtain the full protein sequences of the proteins
+  protSeq <- tryCatch({
+    suppressWarnings(getUniProt(protein))
+  }, error= function(e) {
+    ""
+  })
+  
+  if (nrow(proteinInformation) != 0 ) {
+    ## Put all of the information of interest in a new dataframe
+    geneInfo <- data.frame(
+      Accession = rep(rownames(proteinInformation), sapply(protSeq, length)),
+      `Entry names` = rep(proteinInformation$Entry.name, sapply(protSeq, length)),
+      `Protein names` = rep(proteinInformation$Protein.names, sapply(protSeq, length)),
+      `Full protein Sequence` = unlist(protSeq),
+      `Gene symbol` = rep(proteinInformation$Gene.names, sapply(protSeq, length)), 
+      Organism =  rep(proteinInformation$Organism, sapply(protSeq, length))
+    )
+    
+    return(geneInfo)
+  }
+}
