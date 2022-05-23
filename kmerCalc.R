@@ -28,7 +28,7 @@ kmerGenerator <- function(range, target) {
       for (move in 0:(peplength-1)) {
         ## Create the kmer sequence in the mutation sequencing
         pep <<- ifelse("aa_pos" %in% tolower(colnames(target)), 
-                       paste0(substr(gene_info$Sequence[rownr], as.numeric(gene_info$aa_pos[rownr])-move,  as.numeric(gene_info$aa_pos[rownr])-move+peplength-1)),
+                       paste0(substr(target$Sequence[rownr], as.numeric(target$aa_pos[rownr])-move,  as.numeric(target$aa_pos[rownr])-move+peplength-1)),
                        paste0(substr(target$Sequence[rownr], move, move+peplength-1)))
         ## If the length of the kmer is longer than 7 characters
         if (nchar(pep) > peplength-1) {
