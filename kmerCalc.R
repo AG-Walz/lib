@@ -36,7 +36,7 @@ kmerGenerator <- function(range, target) {
           ifelse("aa_pos" %in% tolower(colnames(target)), 
                            dfComp <- cbind(target[rownr,],
                                    data.frame(kmer=pep,
-                                   mutation=paste0(target$aa_wt[rownr], target$aa_pos[rownr], target$aa_mut[rownr]),
+                                   mutation=paste0(gene_info$aa_wt[rownr], as.numeric(gene_info$aa_pos)[rownr], gene_info$aa_mut[rownr]),
                                    frameshift=move,
                                    kmerLength=peplength)),
                           dfComp <- cbind(target[rownr,], 
