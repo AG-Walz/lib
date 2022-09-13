@@ -55,10 +55,10 @@ collect_protein_info <- function(protein) {
     ## Put all of the information of interest in a new dataframe
     geneInfo <- data.frame(
       Accession = rep(rownames(proteinInformation), sapply(protSeq, length)),
-      `Entry names` = rep(proteinInformation$Entry.name, sapply(protSeq, length)),
+      `Entry names` = rep(proteinInformation$Entry.Name, sapply(protSeq, length)),
       `Protein names` = rep(proteinInformation$Protein.names, sapply(protSeq, length)),
       `Full protein Sequence` = unlist(protSeq),
-      `Gene symbol` = rep(proteinInformation$Gene.names, sapply(protSeq, length)), 
+      `Gene symbol` = rep(proteinInformation$Gene.Names, sapply(protSeq, length)), 
       Organism =  rep(proteinInformation$Organism, sapply(protSeq, length))
     )
     
