@@ -36,18 +36,20 @@ drawProtein <- function(rel_json, legendPos) {
   ## Alter the figures' style
   p <- p + ggplotTheme +
     scale_x_continuous(expand = c(0, 0)) +
-    theme(axis.ticks = element_blank(), 
-          axis.title = element_blank(),
-          axis.text.y = element_blank(),
-          axis.text.x = element_blank(),
-          panel.border = element_blank(),
-          legend.position=legendPos,
-          plot.margin = margin(t =3,r = 0,b = 3,l = 1.3, "cm"),
-          legend.key.size = unit(.25, 'cm'), #change legend key size
-          legend.key.height = unit(.25, 'cm'), #change legend key height
-          legend.key.width = unit(.25, 'cm'), #change legend key width
-          legend.title = element_blank(), #change legend title font size
-          legend.text = element_text(size=6)
+    theme(
+      text = element_text(family="Garamond", size=14),
+      axis.ticks = element_blank(),
+      axis.title = element_blank(),
+      axis.text.y = element_blank(),
+      axis.text.x = element_blank(),
+      panel.border = element_blank(),
+      legend.position=legendPos,
+      plot.margin = margin(t =3,r = 0,b = 3,l = 1.3, "cm"),
+      legend.key.size = unit(.25, 'cm'), #change legend key size
+      legend.key.height = unit(.25, 'cm'), #change legend key height
+      legend.key.width = unit(.25, 'cm'), #change legend key width
+      legend.title = element_blank(), #change legend title font size
+      legend.text = element_text(size=6)
     ) + 
     guides(fill=guide_legend(nrow=10))
   ## Return the ggplot content
